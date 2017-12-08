@@ -1,18 +1,24 @@
-dist: trusty
-sudo: false
-language: go
-
-addons:
-  apt:
-    sources:
-      - sourceline: 'deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main'
-      - key_url: 'https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub'
-    packages:
+--- 
+addons: 
+  apt: 
+    packages: 
       - salt-common
 
-script:
-  - bash .ci-travis/terraform-validation
-  - bash .ci-travis/salt-server-validation
-  - bash .ci-travis/salt-client-validation
-  - bash .ci-travis/salt-minion-validation
-- bash .ci-travis/salt-ctl-validation
+    sources: 
+      - 
+        sourceline: "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main"
+      - 
+        key_url: "https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub"
+before_script: "terraform --version"
+dist: trusty
+install: 
+  - "export PATH=$PATH:$PWD/usr/bin/"
+language: go
+script: 
+  - "bash .ci-travis/terraform-validation"
+  - "bash .ci-travis/salt-server-validation"
+  - "bash .ci-travis/salt-client-validation"
+  - "bash .ci-travis/salt-minion-validation"
+  - "bash .ci-travis/salt-ctl-validation"
+sudo: false
+
