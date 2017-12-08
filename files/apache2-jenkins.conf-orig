@@ -1,0 +1,20 @@
+<Virtualhost *:443>
+    ServerName        jenkins.tvflab.co.uk
+    ProxyRequests     Off
+    ProxyPreserveHost On
+    AllowEncodedSlashes NoDecode
+
+    <Proxy http://localhost:8080/*>
+      Order deny,allow
+      Allow from all
+    </Proxy>
+
+    ProxyPass         /  http://localhost:8080/ nocanon
+    ProxyPassReverse  /  http://localhost:8080/
+    ProxyPassReverse  /  http://jenkins.tvflab.co.uk/
+
+    SSLEngine On
+    SSLCertificateFile /etc/ssl/certs/wildcard_tvflab_co_uk.crt
+    SSLCertificateKeyFile /etc/ssl/private/wildcard_tvflab_co_uk.key
+
+</Virtualhost>
