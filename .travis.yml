@@ -3,6 +3,7 @@ addons:
   apt: 
     packages: 
       - salt-common
+      - salt-master
 
     sources: 
       - 
